@@ -53,7 +53,6 @@ class ElectionPageState extends State<ElectionPage> with WidgetsBindingObserver{
               children: [
                 Container(child: Text(name), padding: EdgeInsets.only(right: 20),),
                 CircleAvatar(child: Image.asset('assets/images/profile_image.jpg'), backgroundColor: Colors.brown.shade800,),
-                // RaisedButton(child: Text('اسئلة المرشح'), onPressed: _seeCandidatePage)
               ], 
               mainAxisAlignment: MainAxisAlignment.end), 
             padding: EdgeInsets.all(15),
@@ -101,10 +100,28 @@ class ElectionPageState extends State<ElectionPage> with WidgetsBindingObserver{
       );
   }
 
+  Widget _questionsView() {
+    return ListView.builder(
+      itemBuilder: (context, i) {
+        return _questionCard(candidateQuestions[i], candidateAnswers[i]);
+      },
+      itemCount: candidateQuestions.length,
+    );
+  }
+
+  Widget _questionCard(question, answer) {
+    return Card(child: 
+        Column(children: [
+          Container(child: Row(textDirection: TextDirection.rtl ,children: [Text(question)], mainAxisSize: MainAxisSize.max,), padding: EdgeInsets.all(12), decoration: new BoxDecoration(color: Colors.grey.shade200),),
+          Container(child: Text(answer, textDirection: TextDirection.rtl ), padding: EdgeInsets.all(12)),
+        ]) 
+    );
+  }
+
   Widget _resultsView() {
     return Center(child: 
         Column(children: [
-          Container(child: Text('لم يحن موعد اعلان النتائج', style: TextStyle(fontSize: 20),), padding: EdgeInsets.all(13),),
+          Container(child: Text('لم يحن موعد اعلان النتائج', style: TextStyle(fontSize: 20)), padding: EdgeInsets.all(13),),
           Icon(Icons.error_outline, size: 30,)
         ], mainAxisAlignment: MainAxisAlignment.center,)
     );
@@ -116,7 +133,8 @@ class ElectionPageState extends State<ElectionPage> with WidgetsBindingObserver{
         builder: (BuildContext context) {
           return new Scaffold(
             appBar: AppBar(title: Text('اسئلة ${name}')),
-            body: Center(child: Text('اسئلة')),
+            body: _questionsView(),
+            floatingActionButton: FloatingActionButton(child: Icon(Icons.add), onPressed: _seeCandidatePage,),
           );
         },
       )
@@ -145,6 +163,20 @@ class ElectionPageState extends State<ElectionPage> with WidgetsBindingObserver{
     });
     return text;
   }
+
+  final candidateQuestions = [
+    'كيف يمكنك ان ترفع من مستوى الجودة في النادي ؟',
+    'كيف يمكنك ان تصل لاعلى عدد من المتابعين في تويتر ؟',
+    'كيف يمكنك ان تصل لاعلى عدد من المتابعين في تويتر ؟',
+    'كيف يمكنك ان تصل لاعلى عدد من المتابعين في تويتر ؟',
+  ];
+
+  final candidateAnswers = [
+    'عن طريق اثراء الترم بالفعاليات قدر الامكان و تقديم الفعاليات الاكثر فعالية بالفعل',
+    'عن طريق اثراء الترم بالفعاليات قدر الامكان و تقديم الفعاليات الاكثر فعالية بالفعل',
+    'عن طريق اثراء الترم بالفعاليات قدر الامكان و تقديم الفعاليات الاكثر فعالية بالفعل',
+    'عن طريق النشر و الاعلان ان ان ان',
+  ];
 
   final candidateNames = ['اسامة الفيفي', 'ابراهيم الفرحان', 'عبدالرحمن السنيدي'];
   final candidatePlans = [
