@@ -58,8 +58,15 @@ class HomePageState extends State<HomePage> {
   Widget _homeButton(title, index) {
     return Container(
       child: RaisedButton(
-        onPressed: () => _goToPage(index), child: Text(title)), 
-        margin: EdgeInsets.only(top: 10.0)
+        onPressed: () => _goToPage(index), 
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center, 
+            children: <Widget>[
+                Icon(Icons.add, size: 40.0,) , 
+                Container(child: Text(title, style: TextStyle(fontSize: 18)), margin: EdgeInsets.only(top: 10.0))
+              ])
+          ), 
+        margin: EdgeInsets.only(top: 10.0),
       );
   }
 
