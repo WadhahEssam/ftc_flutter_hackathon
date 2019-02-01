@@ -14,11 +14,12 @@ class ElectionPageState extends State<ElectionPage> with WidgetsBindingObserver{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('انتخابات النادي')),
-      body: (_selectedIndex == 0) ? _candidatesView() : _candidatureView(),
+      body: (_selectedIndex == 0) ? _candidatesView() : ((_selectedIndex == 1) ? _candidatureView() : _resultsView())  ,
       bottomNavigationBar: BottomNavigationBar(
        items: <BottomNavigationBarItem>[
          BottomNavigationBarItem(icon: Icon(IconData(0xe8d3, fontFamily: 'MaterialIcons')), title: Text('المرشحين')),
          BottomNavigationBarItem(icon: Icon(IconData(0xe3bb, fontFamily: 'MaterialIcons')), title: Text('الترشح')),
+         BottomNavigationBarItem(icon: Icon(IconData(0xe8d0, fontFamily: 'MaterialIcons')), title: Text('النتائج')),
        ],
        currentIndex: _selectedIndex,
        fixedColor: Colors.deepPurple,
@@ -61,7 +62,14 @@ class ElectionPageState extends State<ElectionPage> with WidgetsBindingObserver{
             Container(child: Text('الخطة', style: TextStyle(fontSize: 13)), padding: EdgeInsets.only(top: 10)),
             Container(child: Text(plan, style: TextStyle(fontSize: 10), textDirection: TextDirection.rtl), padding: EdgeInsets.only(top: 5, bottom: 20, left: 20, right: 20)),
             Container(
-              child: RaisedButton(child: Text('التصويت', style: TextStyle(fontSize: 10, color: Colors.white)), onPressed: _seeCandidatePage, color: Colors.deepPurple.shade300,),
+              child: ButtonBar(
+                children:[
+                  RaisedButton(child: Text('اسئلة الاعضاء', style: TextStyle(fontSize: 10, color: Colors.white)), onPressed: () { _pushQuestionsPage(name); }, color: Colors.deepPurple.shade300,), 
+                  RaisedButton(child: Text('تصويت', style: TextStyle(fontSize: 10, color: Colors.white)), onPressed: _seeCandidatePage, color: Colors.green.shade400,), 
+                ],
+                mainAxisSize: MainAxisSize.max,
+                alignment: MainAxisAlignment.center
+                ),
               margin: EdgeInsets.only(bottom: 10), 
             )
           ])) 
@@ -91,6 +99,28 @@ class ElectionPageState extends State<ElectionPage> with WidgetsBindingObserver{
           ), 
           padding: EdgeInsets.all(20.0)),
       );
+  }
+
+  Widget _resultsView() {
+    return Center(child: 
+        Column(children: [
+          Container(child: Text('لم يحن موعد اعلان النتائج', style: TextStyle(fontSize: 20),), padding: EdgeInsets.all(13),),
+          Icon(Icons.error_outline, size: 30,)
+        ], mainAxisAlignment: MainAxisAlignment.center,)
+    );
+  }
+
+  void _pushQuestionsPage(name) {
+    Navigator.of(context).push(
+      new MaterialPageRoute<void>(
+        builder: (BuildContext context) {
+          return new Scaffold(
+            appBar: AppBar(title: Text('اسئلة ${name}')),
+            body: Center(child: Text('اسئلة')),
+          );
+        },
+      )
+    );
   }
 
   void _onItemTapped(int index) {
