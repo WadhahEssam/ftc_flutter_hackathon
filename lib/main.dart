@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'election.dart';
+import 'members.dart';
 
 void main() => runApp(MyApp());
 
@@ -82,10 +84,7 @@ class HomePageState extends State<HomePage> {
     Navigator.of(context).push(
       new MaterialPageRoute<void>(
         builder: (BuildContext context) {    
-          return new Scaffold(
-            appBar: AppBar(title: Text('انتخابات النادي')),
-            body: Center(child: Text('انتخابات النادي')),
-          );
+          return ElectionPage();
         },
       )
     );
@@ -95,14 +94,10 @@ class HomePageState extends State<HomePage> {
     Navigator.of(context).push(
       new MaterialPageRoute<void>(
         builder: (BuildContext context) {    
-          return new Scaffold(
-            appBar: AppBar(title: Text('الاعضاء')),
-            body: Center(child: Text('ترتيب الاعضاء')),
-          );
+          return MembersPage();
         },
       )
     );
   }
-
 }
 
