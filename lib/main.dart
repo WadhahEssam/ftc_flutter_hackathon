@@ -9,21 +9,60 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: HomePage(),
     );
   }
 }
+
+class HomePage extends StatefulWidget {
+  HomePageState createState() => HomePageState();  
+}
+
+class HomePageState extends State<HomePage> {
+  @override 
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('نادي تقنية المستقبل'),
+        actions: <Widget>[IconButton(icon: const Icon(Icons.list), onPressed: _pushSaved,)],
+      ),
+      body: _buildMainButtons(),
+    );
+  }
+
+  _pushSaved() {
+
+  }
+
+  
+
+  Widget _buildMainButtons() {
+    return GridView.count(
+      primary: false,
+      padding: const EdgeInsets.all(20.0),
+      crossAxisSpacing: 10.0,
+      crossAxisCount: 2,
+      children: <Widget>[
+        RaisedButton(onPressed: _pushSaved, child: Text('الانتخابات')),
+        const Text('Heed not the rabble'),
+        const Text('Sound of screams but the'),
+        const Text('Who scream'),
+        const Text('Revolution is coming...'),
+        const Text('Revolution, they...'),
+      ],
+    );
+  }
+
+  // Widget _homeButton() {
+  //   return MaterialButton
+  // }
+
+
+}
+
+
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
