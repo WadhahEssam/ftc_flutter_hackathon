@@ -26,17 +26,41 @@ class ElectionPageState extends State<ElectionPage> {
     );
   }
 
+  Widget _candidatesView() {
+    return Center(child: Text('انتخابات النادي'));
+  }
+
+  Widget _candidatureView() {
+    return Center(
+        child: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+
+            children: [
+              Text('انشاء الخطة', style: TextStyle(fontSize: 20)),
+              TextField(keyboardType: TextInputType.multiline,maxLines: 10),
+              Container(child: Container(), margin: EdgeInsets.only(top: 10.0)), // just a padding
+              RaisedButton(
+                child: Row(children: [
+                  Container(child: Text('نشر الخطة', style: TextStyle(fontSize: 18)), padding: EdgeInsets.only(right: 20.0)),
+                  Icon(IconData(0xe89c, fontFamily: 'MaterialIcons')),
+                ], mainAxisAlignment: MainAxisAlignment.center,), 
+                onPressed: _submitCandidate, 
+                padding: EdgeInsets.only(left: 50, right: 50, top: 10, bottom: 10),
+              )
+            ],
+          ), 
+          padding: EdgeInsets.all(20.0)),
+      );
+  }
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
 
-  Widget _candidatesView() {
-    return Center(child: Text('انتخابات النادي'));
-  }
+  void _submitCandidate() {
 
-  Widget _candidatureView() {
-    return Center(child: Text('الترشح لرئاسة النادي'));
   }
 }
