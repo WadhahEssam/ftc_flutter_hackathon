@@ -8,6 +8,7 @@ class ElectionPage extends StatefulWidget {
 
 class ElectionPageState extends State<ElectionPage> with WidgetsBindingObserver{
   int _selectedIndex = 0;
+  String currentCandidatePlan = '';
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +46,7 @@ class ElectionPageState extends State<ElectionPage> with WidgetsBindingObserver{
       Card(
         child: Column(children: [
           Container(
+            decoration: new BoxDecoration(color: Colors.grey.shade200),
             alignment: Alignment.centerRight,
             child: Row(
               children: [
@@ -56,14 +58,15 @@ class ElectionPageState extends State<ElectionPage> with WidgetsBindingObserver{
             padding: EdgeInsets.all(15),
           ),
           Container(child: Column(children: <Widget>[
-            Text('الخطة', style: TextStyle(fontSize: 13)),
-            Container(child: Text(plan, style: TextStyle(fontSize: 10)), padding: EdgeInsets.all(20)),
+            Container(child: Text('الخطة', style: TextStyle(fontSize: 13)), padding: EdgeInsets.only(top: 10)),
+            Container(child: Text(plan, style: TextStyle(fontSize: 10), textDirection: TextDirection.rtl), padding: EdgeInsets.only(top: 5, bottom: 20, left: 20, right: 20)),
             Container(
-              child: RaisedButton(child: Text('التصويت', style: TextStyle(fontSize: 10, color: Colors.white)), onPressed: _seeCandidatePage, color: Theme.of(context).accentColor,),
+              child: RaisedButton(child: Text('التصويت', style: TextStyle(fontSize: 10, color: Colors.white)), onPressed: _seeCandidatePage, color: Colors.deepPurple.shade300,),
               margin: EdgeInsets.only(bottom: 10), 
             )
           ])) 
-        ])
+        ]),
+        
       );
   }
 
@@ -72,10 +75,9 @@ class ElectionPageState extends State<ElectionPage> with WidgetsBindingObserver{
         child: Container(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-
             children: [
               Text('انشاء الخطة', style: TextStyle(fontSize: 20)),
-              TextField(keyboardType: TextInputType.multiline,maxLines: 10),
+              TextField(keyboardType: TextInputType.multiline,maxLines: 10, onChanged: _textFieldChanged, textDirection: TextDirection.rtl,),
               Container(child: Container(), margin: EdgeInsets.only(top: 10.0)), // just a padding
               RaisedButton(
                 child: Row(children: [
@@ -98,32 +100,28 @@ class ElectionPageState extends State<ElectionPage> with WidgetsBindingObserver{
   }
 
   void _submitCandidate() {
-
+    candidateNames.add('نواف القعيد');
+    candidateImages.add('4');
+    candidatePlans.add(currentCandidatePlan);
   }
 
   void _seeCandidatePage() {
     
   }
 
+  String _textFieldChanged(text) {
+    setState(() {
+      currentCandidatePlan = text;
+    });
+    return text;
+  }
 
   final candidateNames = ['اسامة الفيفي', 'ابراهيم الفرحان', 'عبدالرحمن السنيدي'];
   final candidatePlans = [
-    'خطة اسامة الفيفي خطة اسامة الفيفي خطة اسامة الفيفي خطة اسامة الفيفي خطة اسامة الفيفي خطة اسامة الفيفي خطة اسامة الفيفي', 
+    'يعود بالضرر على الشركة والنادي يكون فيه متابعة مع تطورات النادي من ضيوف ومن مشاركات بحيث انه يتم التأكد من عدم مساس سياسة الدولة او سياسة الجامعة بما اذا كان المقصود بالسلطة انه يتم التحكم بقرارت النادي وش نسوي وايش ما نسوي فأكيد ال وانا بكون ضد هذا الشيء، بس بالطبع يعود بالضرر على الشركة والنادي يكون فيه متابعة مع تطورات النادي من ضيوف ومن مشاركات بحيث انه يتم التأكد من عدم مساس سياسة الدولة او سياسة الجامعة بما اذا كان المقصود بالسلطة انه يتم التحكم بقرارت النادي وش نسوي وايش ما نسوي فأكيد ال وانا بكون ضد هذا الشيء، بس بالطبع يعود بالضرر على الشركة والنادي يكون فيه متابعة مع تطورات النادي من ضيوف ومن مشاركات بحيث انه يتم التأكد من عدم مساس سياسة الدولة او سياسة الجامعة بما اذا كان المقصود بالسلطة انه يتم التحكم بقرارت النادي وش نسوي وايش ما نسوي فأكيد ال وانا بكون ضد هذا الشيء، بس بالطبع', 
     'Make FTC Great Again Make FTC Great Again Make FTC Great Again Make FTC Great Again Make FTC Great Again Make FTC Great Again Make FTC Great Again ', 
     'هلا شباب معكم دحومي ثلاث تسعات هلا شباب معكم دحومي ثلاث تسعات هلا شباب معكم دحومي ثلاث تسعات هلا شباب معكم دحومي ثلاث تسعات هلا شباب معكم دحومي ثلاث تسعات هلا شباب معكم دحومي ثلاث تسعات '
     ];
   final candidateImages = ['1', '2', '3'];
 
-}
-
-class Candidate {
-  String name;
-  String plan;
-  int image;
-
-  Candidate(name, plan, image);
-
-  String getName() {
-    return name;
-  }
 }
