@@ -43,7 +43,7 @@ class HomePageState extends State<HomePage> {
       children: <Widget>[
         _homeButton(title: 'الانتخابات', index: 1, icon: 0xe168),
         _homeButton(title: 'الاعضاء', index: 2, icon: 0xe7ef),
-        _homeButton(title: 'الفعاليات', index: 3, icon: 0xe7ef),
+        _homeButton(title: 'الفعاليات', index: 3, icon: 0xe164),
         _homeButton(title: 'احصائيات', index: 4, icon: 0xe85c),
         _homeButton(title: 'مجموعتي', index: 5, icon: 0xe939),
         _homeButton(title: 'الاعدادات', index: 6, icon: 0xe8b8),
