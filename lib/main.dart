@@ -8,8 +8,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(fontFamily: 'Cairo'),
+      theme: ThemeData(fontFamily: 'Cairo', primarySwatch: Colors.deepPurple),
       home: HomePage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -69,7 +70,6 @@ class HomePageState extends State<HomePage> {
   void _goToPage(index) {
     print(index);
   }
-
 
 }
 
