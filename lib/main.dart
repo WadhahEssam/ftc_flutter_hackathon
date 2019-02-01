@@ -45,19 +45,27 @@ class HomePageState extends State<HomePage> {
       crossAxisSpacing: 10.0,
       crossAxisCount: 2,
       children: <Widget>[
-        RaisedButton(onPressed: _pushSaved, child: Text('الانتخابات')),
-        const Text('Heed not the rabble'),
-        const Text('Sound of screams but the'),
-        const Text('Who scream'),
-        const Text('Revolution is coming...'),
-        const Text('Revolution, they...'),
+        _homeButton('الانتخابات', 1),
+        _homeButton('الاعضاء', 2),
+        _homeButton('الفعاليات', 3),
+        _homeButton('احصائيات الاداء', 4),
+        _homeButton('مجموعتي', 5),
+        _homeButton('الاعدادات', 6),
       ],
     );
   }
 
-  // Widget _homeButton() {
-  //   return MaterialButton
-  // }
+  Widget _homeButton(title, index) {
+    return Container(
+      child: RaisedButton(
+        onPressed: () => _goToPage(index), child: Text(title)), 
+        margin: EdgeInsets.only(top: 10.0)
+      );
+  }
+
+  void _goToPage(index) {
+    print(index);
+  }
 
 
 }
