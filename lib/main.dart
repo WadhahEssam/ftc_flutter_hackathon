@@ -8,9 +8,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: ThemeData(fontFamily: 'Cairo'),
       home: HomePage(),
     );
   }
@@ -25,7 +23,7 @@ class HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('نادي تقنية المستقبل'),
+        title: Text('نادي تقنية المستقبل', style: TextStyle(fontFamily: 'Cairo'),),
         actions: <Widget>[IconButton(icon: const Icon(Icons.list), onPressed: _pushSaved,)],
       ),
       body: _buildMainButtons(),
@@ -36,8 +34,6 @@ class HomePageState extends State<HomePage> {
 
   }
 
-  
-
   Widget _buildMainButtons() {
     return GridView.count(
       primary: false,
@@ -45,24 +41,24 @@ class HomePageState extends State<HomePage> {
       crossAxisSpacing: 10.0,
       crossAxisCount: 2,
       children: <Widget>[
-        _homeButton('الانتخابات', 1),
-        _homeButton('الاعضاء', 2),
-        _homeButton('الفعاليات', 3),
-        _homeButton('احصائيات الاداء', 4),
-        _homeButton('مجموعتي', 5),
-        _homeButton('الاعدادات', 6),
+        _homeButton(title: 'الانتخابات', index: 1, icon: 0xe168),
+        _homeButton(title: 'الاعضاء', index: 2, icon: 0xe7ef),
+        _homeButton(title: 'الفعاليات', index: 3, icon: 0xe7ef),
+        _homeButton(title: 'احصائيات', index: 4, icon: 0xe85c),
+        _homeButton(title: 'مجموعتي', index: 5, icon: 0xe939),
+        _homeButton(title: 'الاعدادات', index: 6, icon: 0xe8b8),
       ],
     );
   }
 
-  Widget _homeButton(title, index) {
+  Widget _homeButton({title, index, icon}) {
     return Container(
       child: RaisedButton(
         onPressed: () => _goToPage(index), 
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center, 
             children: <Widget>[
-                Icon(Icons.add, size: 40.0,) , 
+                Icon(IconData(icon, fontFamily: 'MaterialIcons'), size: 40.0,) , 
                 Container(child: Text(title, style: TextStyle(fontSize: 18)), margin: EdgeInsets.only(top: 10.0))
               ])
           ), 
