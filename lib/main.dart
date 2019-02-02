@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'election.dart';
 import 'members.dart';
 import 'statistics.dart';
+import 'drawer.dart';
 
 void main() => runApp(MyApp());
 
@@ -26,9 +27,9 @@ class HomePageState extends State<HomePage> {
   @override 
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: DrawerSection(),
       appBar: AppBar(
         title: Text('نادي تقنية المستقبل', style: TextStyle(fontFamily: 'Cairo'),),
-        actions: <Widget>[IconButton(icon: const Icon(Icons.list), onPressed: _showDrawer,)],
       ),
       body: _buildMainButtons(),
     );
