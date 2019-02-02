@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ftc_flutter_hackathon/main.dart';
 import 'package:ftc_flutter_hackathon/members.dart';
-import 'package:ftc_flutter_hackathon/statistics.dart';
+import 'package:ftc_flutter_hackathon/settings.dart';
 
 class DrawerSection extends StatefulWidget {
   @override
@@ -20,11 +20,27 @@ class DrawerSectionState extends State<DrawerSection> {
   _getDrawerItemWidget(int pos) {
     switch (pos) {
       case 0:
-         return HomePage();
+        if(context!=context)
+         return Navigator.of(context).push(new MaterialPageRoute<void>(
+           builder: (BuildContext context) {
+             return HomePage();
+           },
+         ));
+        break;
       case 1:
-        return MembersPageState() ;
+        return Navigator.of(context).push(new MaterialPageRoute<void>(
+          builder: (BuildContext context) {
+            return FirstFragment();
+          },
+        ));
+
       case 2:
-          return new FirstFragment();
+       return Navigator.of(context).push(new MaterialPageRoute<void>(
+          builder: (BuildContext context) {
+            return SettingsPage();
+          },
+        ));
+
       case 3:
         _neverSatisfied();
         break;
@@ -65,11 +81,7 @@ class DrawerSectionState extends State<DrawerSection> {
     Navigator.of(context).pop(context); // close the drawer
     _getDrawerItemWidget(index);
   }
-  void navigait(){
-    Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => StatisticsPage()));
-  }
+
 
   @override
   Widget build(BuildContext context) {

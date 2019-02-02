@@ -6,6 +6,7 @@ import 'drawer.dart';
 import 'dart:async';
 import 'dart:math';
 import 'settings.dart';
+import 'suggestion.dart';
 
 void main() => runApp(MyApp());
 
@@ -47,7 +48,7 @@ class HomePageState extends State<HomePage> {
     return Scaffold(
       endDrawer: DrawerSection(),
       appBar: AppBar(
-        title: Text('نادي تقنية المستقبل'),        
+        title: Text('نادي تقنية المستقبل'),
       ),
       body: _buildMainButtons(),
     );
@@ -114,6 +115,16 @@ class HomePageState extends State<HomePage> {
       margin: EdgeInsets.only(top: 10.0),
     );
   }
+  void _showToast(BuildContext context) {
+    final scaffold = Scaffold.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        content: const Text('Added to favorite'),
+        action: SnackBarAction(
+            label: 'UNDO', onPressed: scaffold.hideCurrentSnackBar),
+      ),
+    );
+  }
 
   void _homeRouter(index) {
     print(index);
@@ -127,7 +138,15 @@ class HomePageState extends State<HomePage> {
       case 4:
         _goToStatisticsPage();
         return;
-      case 7: 
+      case 8:
+        Scaffold.of(context).showSnackBar(new SnackBar(
+          content: new Text("Sending Message"),
+        ));
+        return;
+      case 6:
+        _goToSuggestionPage();
+            return;
+      case 7:
         _goToSettingsPage();
         return;
     }
@@ -137,6 +156,13 @@ class HomePageState extends State<HomePage> {
     Navigator.of(context).push(new MaterialPageRoute<void>(
       builder: (BuildContext context) {
         return StatisticsPage();
+      },
+    ));
+  }
+  void _goToSuggestionPage() {
+    Navigator.of(context).push(new MaterialPageRoute<void>(
+      builder: (BuildContext context) {
+        return SuggestionPage();
       },
     ));
   }

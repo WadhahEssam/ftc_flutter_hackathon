@@ -19,55 +19,55 @@ class ElectionPageState extends State<ElectionPage> with WidgetsBindingObserver{
     ),
   );
 
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('انتخابات النادي')),
       body: (_selectedIndex == 0) ? _candidatesView() : ((_selectedIndex == 1) ? _candidatureView() : _resultsView())  ,
       bottomNavigationBar: BottomNavigationBar(
-       items: <BottomNavigationBarItem>[
-         BottomNavigationBarItem(icon: Icon(IconData(0xe8d3, fontFamily: 'MaterialIcons')), title: Text('المرشحين')),
-         BottomNavigationBarItem(icon: Icon(IconData(0xe3bb, fontFamily: 'MaterialIcons')), title: Text('الترشح')),
-         BottomNavigationBarItem(icon: Icon(IconData(0xe8d0, fontFamily: 'MaterialIcons')), title: Text('النتائج')),
-       ],
-       currentIndex: _selectedIndex,
-       fixedColor: Colors.deepPurple,
-       onTap: _onItemTapped,
-     ),
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Icon(IconData(0xe8d3, fontFamily: 'MaterialIcons')), title: Text('المرشحين')),
+          BottomNavigationBarItem(icon: Icon(IconData(0xe3bb, fontFamily: 'MaterialIcons')), title: Text('الترشح')),
+          BottomNavigationBarItem(icon: Icon(IconData(0xe8d0, fontFamily: 'MaterialIcons')), title: Text('النتائج')),
+        ],
+        currentIndex: _selectedIndex,
+        fixedColor: Colors.deepPurple,
+        onTap: _onItemTapped,
+      ),
     );
   }
 
   Widget _candidatesView() {
     return Center(
-      child: Container(
-        child: ListView.builder(
-          padding: const EdgeInsets.all(14.0),
-          itemCount: candidateNames.length,
-          itemBuilder: (BuildContext ctxt, int i) {
-              return Column(children: [Container(padding: EdgeInsets.only(top: 20)),  _candidateCard(candidateNames[i], candidatePlans[i], candidateImages[i])]);
-          }
-        ),
-      )
+        child: Container(
+          child: ListView.builder(
+              padding: const EdgeInsets.all(14.0),
+              itemCount: candidateNames.length,
+              itemBuilder: (BuildContext ctxt, int i) {
+                return Column(children: [Container(padding: EdgeInsets.only(top: 20)),  _candidateCard(candidateNames[i], candidatePlans[i], candidateImages[i])]);
+              }
+          ),
+        )
     );
   }
 
   Widget _candidateCard(String name, String plan, String image) {
-    return 
-      Card( 
+    return
+      Card(
         shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20.0)),
+          borderRadius: BorderRadius.all(Radius.circular(20.0)),
         ),
         child: Column(children: [
           Container(
             decoration: new BoxDecoration(color: Colors.deepPurple.shade200, borderRadius: BorderRadius.only(topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0))),
             alignment: Alignment.centerRight,
             child: Row(
-              children: [
-                Container(child: Text(name, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white)), padding: EdgeInsets.only(right: 20),),
-                CircleAvatar(child: ClipRRect(child: Image.asset('assets/images/${image}_min.jpg', width: 55, height: 55),borderRadius: new BorderRadius.all(Radius.elliptical(20, 20)),),)
-              ], 
-              mainAxisAlignment: MainAxisAlignment.center), 
+                children: [
+                  Container(child: Text(name, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white)), padding: EdgeInsets.only(right: 20),),
+                  CircleAvatar(child: ClipRRect(child: Image.asset('assets/images/${image}_min.jpg', width: 55, height: 55),borderRadius: new BorderRadius.all(Radius.elliptical(20, 20)),),)
+                ],
+                mainAxisAlignment: MainAxisAlignment.center),
             padding: EdgeInsets.only(top: 15, bottom:15, left: 10),
           ),
           Container(child: Column(children: <Widget>[
@@ -75,24 +75,24 @@ class ElectionPageState extends State<ElectionPage> with WidgetsBindingObserver{
             Container(child: Text(plan, style: TextStyle(fontSize: 10, letterSpacing: 2), textDirection: TextDirection.rtl), padding: EdgeInsets.only(top: 5, bottom: 20, left: 20, right: 20)),
             Container(
               child: ButtonBar(
-                children:[
-                  RaisedButton(child: Text('اسئلة الموجهة للمرشح', style: TextStyle(fontSize: 10, color: Colors.white)), onPressed: () { _pushQuestionsPage(name); }, color: Colors.deepPurple.shade300,), 
-                  RaisedButton(child: Text('تصويت', style: TextStyle(fontSize: 10, color: Colors.white)), onPressed: _seeCandidatePage, color: Colors.green.shade400,), 
-                ],
-                mainAxisSize: MainAxisSize.max,
-                alignment: MainAxisAlignment.center
-                ),
-              margin: EdgeInsets.only(bottom: 10), 
+                  children:[
+                    RaisedButton(child: Text('اسئلة الموجهة للمرشح', style: TextStyle(fontSize: 10, color: Colors.white)), onPressed: () { _pushQuestionsPage(name); }, color: Colors.deepPurple.shade300,),
+                    RaisedButton(child: Text('تصويت', style: TextStyle(fontSize: 10, color: Colors.white)), onPressed: _seeCandidatePage, color: Colors.green.shade400,),
+                  ],
+                  mainAxisSize: MainAxisSize.max,
+                  alignment: MainAxisAlignment.center
+              ),
+              margin: EdgeInsets.only(bottom: 10),
             )
-          ])) 
+          ]))
         ]),
-        
+
       );
   }
 
   Widget _candidatureView() {
     return Center(
-        child: Container(
+      child: Container(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -104,14 +104,14 @@ class ElectionPageState extends State<ElectionPage> with WidgetsBindingObserver{
                 child: Row(children: [
                   Container(child: Text('نشر الخطة', style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)), padding: EdgeInsets.only(right: 20.0)),
                   Icon(IconData(0xe89c, fontFamily: 'MaterialIcons'), color:Colors.white),
-                ], mainAxisAlignment: MainAxisAlignment.center,), 
-                onPressed: _submitCandidate, 
+                ], mainAxisAlignment: MainAxisAlignment.center,),
+                onPressed: _submitCandidate,
                 padding: EdgeInsets.only(left: 50, right: 50, top: 10, bottom: 10),
               )
             ],
-          ), 
+          ),
           padding: EdgeInsets.all(20.0)),
-      );
+    );
   }
 
   Widget _questionsView() {
@@ -124,34 +124,34 @@ class ElectionPageState extends State<ElectionPage> with WidgetsBindingObserver{
   }
 
   Widget _questionCard(question, answer) {
-    return Card(child: 
-        Column(children: [
-          Container(child: Row(textDirection: TextDirection.rtl ,children: [Text(question)], mainAxisSize: MainAxisSize.max,), padding: EdgeInsets.all(12), decoration: new BoxDecoration(color: Colors.grey.shade200),),
-          Container(child: Text(answer, textDirection: TextDirection.rtl ), padding: EdgeInsets.all(12)),
-        ]), 
+    return Card(child:
+    Column(children: [
+      Container(child: Row(textDirection: TextDirection.rtl ,children: [Text(question)], mainAxisSize: MainAxisSize.max,), padding: EdgeInsets.all(12), decoration: new BoxDecoration(color: Colors.grey.shade200),),
+      Container(child: Text(answer, textDirection: TextDirection.rtl ), padding: EdgeInsets.all(12)),
+    ]),
     );
   }
 
   Widget _resultsView() {
-    return Center(child: 
-        Column(children: [
-          Container(child: Text('لم يحن موعد اعلان النتائج', style: TextStyle(fontSize: 20)), padding: EdgeInsets.all(13),),
-          Icon(Icons.error_outline, size: 30,)
-        ], mainAxisAlignment: MainAxisAlignment.center,)
+    return Center(child:
+    Column(children: [
+      Container(child: Text('لم يحن موعد اعلان النتائج', style: TextStyle(fontSize: 20)), padding: EdgeInsets.all(13),),
+      Icon(Icons.error_outline, size: 30,)
+    ], mainAxisAlignment: MainAxisAlignment.center,)
     );
   }
 
   void _pushQuestionsPage(name) {
     Navigator.of(context).push(
-      new MaterialPageRoute<void>(
-        builder: (BuildContext context) {
-          return new Scaffold(
-            appBar: AppBar(title: Text('اسئلة ${name}')),
-            body: _questionsView(),
-            floatingActionButton: FloatingActionButton(child: Icon(Icons.add), onPressed: _seeCandidatePage,),
-          );
-        },
-      )
+        new MaterialPageRoute<void>(
+          builder: (BuildContext context) {
+            return new Scaffold(
+              appBar: AppBar(title: Text('اسئلة ${name}')),
+              body: _questionsView(),
+              floatingActionButton: FloatingActionButton(child: Icon(Icons.add), onPressed: _seeCandidatePage,),
+            );
+          },
+        )
     );
   }
 
@@ -171,7 +171,7 @@ class ElectionPageState extends State<ElectionPage> with WidgetsBindingObserver{
   }
 
   void _seeCandidatePage() {
-    
+
   }
 
   String _textFieldChanged(text) {
@@ -197,10 +197,10 @@ class ElectionPageState extends State<ElectionPage> with WidgetsBindingObserver{
 
   final candidateNames = ['نواف القعيد', 'ابراهيم الفرحان', 'ناصر العواجي'];
   final candidatePlans = [
-    'أخوكم المترشح نواف القعيد، والنائب أسامة العقيلي. سنتشرح لقيادة هذا النادي العظيم الترم القادم بحول هللا.نثق بكم تمام الثقة وبأنكم العمود الفقري لهذا النادي بحكم ما شهدنا منكم وبطموحكم الغير مسبوق. ونثق بأننا بجهودكم الجبارة سنصل بالنادي الى مستوى يجعلنا فخورين بالنادي وإنجازاته التي سنحققها معكم بإذن هللا تعالى أخوكم المترشح أسامة الفيفي، والنائب أسامة العقيلي. سنتشرح لقيادة هذا النادي العظيم الترم القادم بحول هللا.نثق بكم تمام الثقة وبأنكم العمود الفقري لهذا النادي بحكم ما شهدنا منكم وبطموحكم الغير مسبوق. ونثق بأننا بجهودكم الجبارة سنصل بالنادي الى مستوى يجعلنا فخورين بالنادي وإنجازاته التي سنحققها معكم بإذن هللا تعالى أخوكم المترشح أسامة الفيفي، والنائب أسامة العقيلي. سنتشرح لقيادة هذا النادي العظيم الترم القادم بحول هللا.نثق بكم تمام الثقة وبأنكم العمود الفقري لهذا النادي بحكم ما شهدنا منكم وبطموحكم الغير مسبوق. ونثق بأننا بجهودكم الجبارة سنصل بالنادي الى مستوى يجعلنا فخورين بالنادي وإنجازاته التي سنحققها معكم بإذن هللا تعالى', 
-    'Make FTC Great Again Make FTC Great.', 
+    'أخوكم المترشح نواف القعيد، والنائب أسامة العقيلي. سنتشرح لقيادة هذا النادي العظيم الترم القادم بحول هللا.نثق بكم تمام الثقة وبأنكم العمود الفقري لهذا النادي بحكم ما شهدنا منكم وبطموحكم الغير مسبوق. ونثق بأننا بجهودكم الجبارة سنصل بالنادي الى مستوى يجعلنا فخورين بالنادي وإنجازاته التي سنحققها معكم بإذن هللا تعالى أخوكم المترشح أسامة الفيفي، والنائب أسامة العقيلي. سنتشرح لقيادة هذا النادي العظيم الترم القادم بحول هللا.نثق بكم تمام الثقة وبأنكم العمود الفقري لهذا النادي بحكم ما شهدنا منكم وبطموحكم الغير مسبوق. ونثق بأننا بجهودكم الجبارة سنصل بالنادي الى مستوى يجعلنا فخورين بالنادي وإنجازاته التي سنحققها معكم بإذن هللا تعالى أخوكم المترشح أسامة الفيفي، والنائب أسامة العقيلي. سنتشرح لقيادة هذا النادي العظيم الترم القادم بحول هللا.نثق بكم تمام الثقة وبأنكم العمود الفقري لهذا النادي بحكم ما شهدنا منكم وبطموحكم الغير مسبوق. ونثق بأننا بجهودكم الجبارة سنصل بالنادي الى مستوى يجعلنا فخورين بالنادي وإنجازاته التي سنحققها معكم بإذن هللا تعالى',
+    'Make FTC Great Again Make FTC Great.',
     'هلا شباب معكم دحومي ثلاث تسعات هلا شباب معكم دحومي ثلاث تسعات هلا شباب معكم دحومي ثلاث تسعات هلا شباب معكم دحومي ثلاث تسعات هلا شباب معكم دحومي ثلاث تسعات هلا شباب معكم دحومي ثلاث تسعات '
-    ];
+  ];
   final candidateImages = ['3', '4', '7'];
 
 }

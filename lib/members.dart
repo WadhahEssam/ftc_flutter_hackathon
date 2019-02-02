@@ -52,14 +52,14 @@ class MembersPageState extends State<MembersPage> {
 
   Transform order(Member m, int i){
     return Transform(
-      transform: new Matrix4.identity()..scale(0.9),
-      child: Chip(
-        backgroundColor: getColor(m),
-        label: Text(
-          m.title,
-          style: titleStyle,
-        ),
-      )
+        transform: new Matrix4.identity()..scale(0.9),
+        child: Chip(
+          backgroundColor: getColor(m),
+          label: Text(
+            m.title,
+            style: titleStyle,
+          ),
+        )
     );
   }
 
@@ -84,19 +84,19 @@ class MembersPageState extends State<MembersPage> {
   Widget _buildRow(Member m) {
     var rng = new Random();
     return ListTile(
-      title: Container(
-        child: Text(m.name, style: nameStyle),
-        alignment: Alignment.centerRight,
-      ),
-      subtitle: Container(
+        title: Container(
+          child: Text(m.name, style: nameStyle),
+          alignment: Alignment.centerRight,
+        ),
+        subtitle: Container(
           alignment: Alignment.centerRight,
           child: order(m,0),
-      ),
-      leading: Text(
-        m.score.toString(),
-        style: nameStyle,
-      ),
-      trailing: ClipRRect(child: Image.asset('assets/images/${(rng.nextInt(9)+1)}_min.jpg', width: 60, height: 60),borderRadius: new BorderRadius.all(Radius.elliptical(20, 20)), )
+        ),
+        leading: Text(
+          m.score.toString(),
+          style: nameStyle,
+        ),
+        trailing: ClipRRect(child: Image.asset('assets/images/${(rng.nextInt(9)+1)}_min.jpg', width: 60, height: 60),borderRadius: new BorderRadius.all(Radius.elliptical(20, 20)), )
     );
   }
 }
