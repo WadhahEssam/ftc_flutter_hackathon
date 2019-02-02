@@ -15,7 +15,7 @@ class SettingsPageState extends State<SettingsPage> {
   }
 
   Widget _settingsMenu() {
-    return Center(child: Text('الاعدادات'));
+    return Center(child: Text('لا يوجد اعدادات حاليا'));
   }
 }
 

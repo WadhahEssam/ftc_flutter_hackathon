@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(fontFamily: 'Cairo', primarySwatch: Colors.deepPurple, brightness: Brightness.dark,),
+      theme: ThemeData(fontFamily: 'Cairo', primarySwatch: Colors.deepPurple, brightness: Brightness.light),
       home: HomePage(),
       debugShowCheckedModeBanner: false,
     );
@@ -47,16 +47,14 @@ class HomePageState extends State<HomePage> {
     return Scaffold(
       drawer: DrawerSection(),
       appBar: AppBar(
-        title: Text(
-          'نادي تقنية المستقبل',
-          style: TextStyle(fontFamily: 'Cairo'),
-        ),
+        title: Text('نادي تقنية المستقبل'),
+        actions: <Widget>[IconButton(icon: const Icon(Icons.info), onPressed: _showDrawer,)],
       ),
       body: _buildMainButtons(),
     );
   }
 
-  _showDrawer() {
+  void _showDrawer() {
     print('drawer supposed to be viwed');
   }
 

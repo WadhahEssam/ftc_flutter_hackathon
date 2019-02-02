@@ -35,7 +35,7 @@ class ElectionPageState extends State<ElectionPage> with WidgetsBindingObserver{
           padding: const EdgeInsets.all(14.0),
           itemCount: candidateNames.length,
           itemBuilder: (BuildContext ctxt, int i) {
-            return _candidateCard(candidateNames[i], candidatePlans[i], candidateImages[i]);
+              return Column(children: [Container(padding: EdgeInsets.only(top: 20)),  _candidateCard(candidateNames[i], candidatePlans[i], candidateImages[i])]);
           }
         ),
       )
@@ -44,10 +44,13 @@ class ElectionPageState extends State<ElectionPage> with WidgetsBindingObserver{
 
   Widget _candidateCard(String name, String plan, String image) {
     return 
-      Card(
+      Card( 
+        shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(20.0)),
+        ),
         child: Column(children: [
           Container(
-            decoration: new BoxDecoration(color: Colors.deepPurple.shade200,),
+            decoration: new BoxDecoration(color: Colors.deepPurple.shade200, borderRadius: BorderRadius.only(topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0))),
             alignment: Alignment.centerRight,
             child: Row(
               children: [
@@ -58,7 +61,7 @@ class ElectionPageState extends State<ElectionPage> with WidgetsBindingObserver{
             padding: EdgeInsets.only(top: 15, bottom:15, left: 10),
           ),
           Container(child: Column(children: <Widget>[
-            Container(child: Chip(label: Text('خطة المرشح', style: TextStyle(fontSize: 13, letterSpacing: 2))), padding: EdgeInsets.only(top: 15, bottom: 5)),
+            Container(child: Chip(label: Text('الخطة', style: TextStyle(fontSize: 13, letterSpacing: 2))), padding: EdgeInsets.only(top: 15, bottom: 5)),
             Container(child: Text(plan, style: TextStyle(fontSize: 10, letterSpacing: 2), textDirection: TextDirection.rtl), padding: EdgeInsets.only(top: 5, bottom: 20, left: 20, right: 20)),
             Container(
               child: ButtonBar(
@@ -83,13 +86,14 @@ class ElectionPageState extends State<ElectionPage> with WidgetsBindingObserver{
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('انشاء الخطة', style: TextStyle(fontSize: 20)),
+              Chip(label: Text('انشاء الخطة', style: TextStyle(fontSize: 20))),
               TextField(keyboardType: TextInputType.multiline,maxLines: 10, onChanged: _textFieldChanged, textDirection: TextDirection.rtl,),
               Container(child: Container(), margin: EdgeInsets.only(top: 10.0)), // just a padding
               RaisedButton(
+                color: Colors.green.shade400,
                 child: Row(children: [
-                  Container(child: Text('نشر الخطة', style: TextStyle(fontSize: 18)), padding: EdgeInsets.only(right: 20.0)),
-                  Icon(IconData(0xe89c, fontFamily: 'MaterialIcons')),
+                  Container(child: Text('نشر الخطة', style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)), padding: EdgeInsets.only(right: 20.0)),
+                  Icon(IconData(0xe89c, fontFamily: 'MaterialIcons'), color:Colors.white),
                 ], mainAxisAlignment: MainAxisAlignment.center,), 
                 onPressed: _submitCandidate, 
                 padding: EdgeInsets.only(left: 50, right: 50, top: 10, bottom: 10),
@@ -114,7 +118,7 @@ class ElectionPageState extends State<ElectionPage> with WidgetsBindingObserver{
         Column(children: [
           Container(child: Row(textDirection: TextDirection.rtl ,children: [Text(question)], mainAxisSize: MainAxisSize.max,), padding: EdgeInsets.all(12), decoration: new BoxDecoration(color: Colors.grey.shade200),),
           Container(child: Text(answer, textDirection: TextDirection.rtl ), padding: EdgeInsets.all(12)),
-        ]) 
+        ]), 
     );
   }
 
@@ -148,7 +152,7 @@ class ElectionPageState extends State<ElectionPage> with WidgetsBindingObserver{
   }
 
   void _submitCandidate() {
-    candidateNames.add('نواف القعيد');
+    candidateNames.add('انس الردادي');
     candidateImages.add('4');
     candidatePlans.add(currentCandidatePlan);
   }
