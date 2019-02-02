@@ -52,8 +52,8 @@ class HomePageState extends State<HomePage> {
         _homeButton(title: 'احصائيات', index: 4, icon: 0xe85c),
         _homeButton(title: 'مجموعتي', index: 5, icon: 0xe939),
         _homeButton(title: 'الاعدادات', index: 6, icon: 0xe8b8),
-        _homeButton(title: 'الاعدادات', index: 6, icon: 0xe8b8),
-        _homeButton(title: 'الاعدادات', index: 6, icon: 0xe8b8),
+        _homeButton(title: 'نسبة الكافيين', index: 7, icon: 0xe8b8),
+        _homeButton(title: 'اقتراحات', index: 8, icon: 0xe8b8),
       ],
     );
   }

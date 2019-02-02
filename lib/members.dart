@@ -8,7 +8,7 @@ class MembersPage extends StatefulWidget {
 class MembersPageState extends State<MembersPage> {
   final names = <Member>[];
   final nameStyle = const TextStyle(fontSize: 22.0);
-  final titleStyle = const TextStyle(fontSize: 13.0, color: Colors.white);
+  final titleStyle = const TextStyle(fontSize: 12, color: Colors.white);
 
   @override
   Widget build(BuildContext context) {
@@ -49,13 +49,16 @@ class MembersPageState extends State<MembersPage> {
     );
   }
 
-  Chip order(Member m, int i){
-    return Chip(
-      backgroundColor: getColor(m),
-      label: Text(
-        m.title,
-        style: titleStyle,
-      ),
+  Transform order(Member m, int i){
+    return Transform(
+      transform: new Matrix4.identity()..scale(0.9),
+      child: Chip(
+        backgroundColor: getColor(m),
+        label: Text(
+          m.title,
+          style: titleStyle,
+        ),
+      )
     );
   }
 
@@ -85,7 +88,7 @@ class MembersPageState extends State<MembersPage> {
       ),
       subtitle: Container(
           alignment: Alignment.centerRight,
-          child: order(m,0)
+          child: order(m,0),
       ),
       leading: Text(
         m.score.toString(),
