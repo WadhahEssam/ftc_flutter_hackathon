@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'election.dart';
 import 'members.dart';
+import 'statistics.dart';
 
 void main() => runApp(MyApp());
 
@@ -77,7 +78,21 @@ class HomePageState extends State<HomePage> {
         return;
       case 2: 
         _goToMembersPage();
+        return;
+      case 4: 
+        _goToStatisticsPage();
+        return;
     }
+  }
+
+  void _goToStatisticsPage() {
+    Navigator.of(context).push(
+      new MaterialPageRoute<void>(
+        builder: (BuildContext context) {    
+          return StatisticsPage();
+        },
+      )
+    );
   }
 
   void _goToElectionPage() {
