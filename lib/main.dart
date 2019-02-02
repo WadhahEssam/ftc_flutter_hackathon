@@ -45,10 +45,9 @@ class HomePageState extends State<HomePage> {
     });
 
     return Scaffold(
-      drawer: DrawerSection(),
+      endDrawer: DrawerSection(),
       appBar: AppBar(
-        title: Text('نادي تقنية المستقبل'),
-        actions: <Widget>[IconButton(icon: const Icon(Icons.info), onPressed: _showDrawer,)],
+        title: Text('نادي تقنية المستقبل'),        
       ),
       body: _buildMainButtons(),
     );

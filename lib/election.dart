@@ -9,7 +9,17 @@ class ElectionPage extends StatefulWidget {
 class ElectionPageState extends State<ElectionPage> with WidgetsBindingObserver{
   int _selectedIndex = 0;
   String currentCandidatePlan = '';
+  final snackBar = SnackBar(
+    content: Text('Yay! A SnackBar!'),
+    action: SnackBarAction(
+      label: 'Undo',
+      onPressed: () {
+        // Some code to undo the change!
+      },
+    ),
+  );
 
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -152,9 +162,12 @@ class ElectionPageState extends State<ElectionPage> with WidgetsBindingObserver{
   }
 
   void _submitCandidate() {
-    candidateNames.add('انس الردادي');
-    candidateImages.add('4');
-    candidatePlans.add(currentCandidatePlan);
+    setState(() {
+      candidateNames.add('انس الردادي');
+      candidateImages.add('4');
+      candidatePlans.add(currentCandidatePlan);
+      _selectedIndex = 0;
+    });
   }
 
   void _seeCandidatePage() {

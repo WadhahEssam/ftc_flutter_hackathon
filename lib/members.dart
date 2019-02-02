@@ -22,16 +22,16 @@ class MembersPageState extends State<MembersPage> {
 
   void fillArray() {
     names.addAll([
-      new Member("أنس الردادي", "عضو", 80),
-      new Member("وضاح عصام", "عضو", 80),
-      new Member("خالد العجلان", "رئيس لجنة", 32),
-      new Member("عبدالله القنية", "رئيس", 31),
-      new Member("محمد الجاسر", "نائب الرئيس", 27),
-      new Member("أسامة الفيفي", "عضو", 24),
-      new Member("عبادة عرابي", "رئيس لجنة", 16),
-      new Member("نواف القعيد", "عضو", 13),
-      new Member("يوسف الخليف", "عضو", 7),
-      new Member("عبدالرحمن القنية", "عضو", 2),
+      new Member("عبدالعزيز الحميد", "عضو", 80, 1),
+      new Member("وضاح عصام", "عضو", 80, 2),
+      new Member("خالد العجلان", "رئيس لجنة", 32, 3),
+      new Member("عبدالله القنية", "رئيس", 31, 4),
+      new Member("محمد الجاسر", "نائب الرئيس", 27, 5),
+      new Member("أسامة الفيفي", "عضو", 24, 6),
+      new Member("عبادة عرابي", "رئيس لجنة", 16, 6),
+      new Member("نواف القعيد", "عضو", 13, 7),
+      new Member("يوسف الخليف", "عضو", 7, 8),
+      new Member("عبدالرحمن القنية", "عضو", 2, 9),
     ]);
   }
 
@@ -105,6 +105,7 @@ class Member {
   String name;
   String title;
   int score;
+  int image;
 
-  Member(this.name, this.title, this.score);
+  Member(this.name, this.title, this.score, this.image);
 }
