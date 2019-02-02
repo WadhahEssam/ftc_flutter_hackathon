@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 class MembersPage extends StatefulWidget {
   @override
@@ -21,24 +22,24 @@ class MembersPageState extends State<MembersPage> {
 
   void fillArray() {
     names.addAll([
-      new Member("أنس", "عضو", 80),
-      new Member("وضاح", "عضو", 80),
-      new Member("خالد", "رئيس لجنة", 32),
-      new Member("عبدالله", "رئيس", 31),
-      new Member("محمد", "نائب الرئيس", 27),
-      new Member("أسامة", "عضو", 24),
-      new Member("عبادة", "عضو", 16),
-      new Member("نواف", "عضو", 13),
-      new Member("يوسف", "عضو", 7),
-      new Member("عبدالرحمن", "عضو", 2),
+      new Member("أنس الردادي", "عضو", 80),
+      new Member("وضاح عصام", "عضو", 80),
+      new Member("خالد العجلان", "رئيس لجنة", 32),
+      new Member("عبدالله القنية", "رئيس", 31),
+      new Member("محمد الجاسر", "نائب الرئيس", 27),
+      new Member("أسامة الفيفي", "عضو", 24),
+      new Member("عبادة عرابي", "رئيس لجنة", 16),
+      new Member("نواف القعيد", "عضو", 13),
+      new Member("يوسف الخليف", "عضو", 7),
+      new Member("عبدالرحمن القنية", "عضو", 2),
     ]);
   }
 
   Widget buildMembers() {
     return ListView.builder(
-      padding: EdgeInsets.all(8.0),
+      padding: EdgeInsets.all(0),
       itemBuilder: (context, i) {
-        if (i.isOdd) return Divider(height: 16.0);
+        if (i.isOdd) return Divider(height: 2.0, color: Colors.deepPurple);
         final index = i ~/ 2;
         if (index > names.length) {
           return Container(child: Text(''));
@@ -81,6 +82,7 @@ class MembersPageState extends State<MembersPage> {
 
   }
   Widget _buildRow(Member m) {
+    var rng = new Random();
     return ListTile(
       title: Container(
         child: Text(m.name, style: nameStyle),
@@ -94,9 +96,7 @@ class MembersPageState extends State<MembersPage> {
         m.score.toString(),
         style: nameStyle,
       ),
-      trailing: CircleAvatar(
-        child: Image.asset('assets/images/profile_image.jpg'),
-      ),
+      trailing: ClipRRect(child: Image.asset('assets/images/${(rng.nextInt(9)+1)}_min.jpg', width: 60, height: 60),borderRadius: new BorderRadius.all(Radius.elliptical(20, 20)), )
     );
   }
 }

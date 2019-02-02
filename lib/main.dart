@@ -3,6 +3,9 @@ import 'election.dart';
 import 'members.dart';
 import 'statistics.dart';
 import 'drawer.dart';
+import 'dart:async';
+import 'dart:math';
+import 'settings.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(fontFamily: 'Cairo', primarySwatch: Colors.deepPurple),
+      theme: ThemeData(fontFamily: 'Cairo', primarySwatch: Colors.deepPurple, brightness: Brightness.dark,),
       home: HomePage(),
       debugShowCheckedModeBanner: false,
     );
@@ -20,16 +23,34 @@ class MyApp extends StatelessWidget {
 }
 
 class HomePage extends StatefulWidget {
-  HomePageState createState() => HomePageState();  
+  HomePageState createState() => HomePageState();
 }
 
 class HomePageState extends State<HomePage> {
-  @override 
+  String caff = '75%';
+
+  @override
   Widget build(BuildContext context) {
+    const oneSec = const Duration(seconds:1);
+    bool isRunning = false;
+    new Timer.periodic(oneSec, (Timer t) {
+      if (!isRunning) {
+        var rng = new Random();
+        setState(() {
+          caff = '${rng.nextInt(15)+60
+          }%';
+          isRunning = true;
+        });
+      }
+    });
+
     return Scaffold(
       drawer: DrawerSection(),
       appBar: AppBar(
-        title: Text('نادي تقنية المستقبل', style: TextStyle(fontFamily: 'Cairo'),),
+        title: Text(
+          'نادي تقنية المستقبل',
+          style: TextStyle(fontFamily: 'Cairo'),
+        ),
       ),
       body: _buildMainButtons(),
     );
@@ -46,76 +67,104 @@ class HomePageState extends State<HomePage> {
       crossAxisSpacing: 10.0,
       crossAxisCount: 2,
       children: <Widget>[
-        _homeButton(title: 'الانتخابات', index: 1, icon: 0xe168),
-        _homeButton(title: 'الاعضاء', index: 2, icon: 0xe7ef),
-        _homeButton(title: 'الفعاليات', index: 3, icon: 0xe164),
-        _homeButton(title: 'احصائيات', index: 4, icon: 0xe85c),
-        _homeButton(title: 'مجموعتي', index: 5, icon: 0xe939),
-        _homeButton(title: 'الاعدادات', index: 6, icon: 0xe8b8),
-        _homeButton(title: 'نسبة الكافيين', index: 7, icon: 0xe8b8),
-        _homeButton(title: 'اقتراحات', index: 8, icon: 0xe8b8),
+        _homeButton(title: 'الانتخابات', index: 1, icon: 0xe168, color: Colors.deepPurple[200]),
+        _homeButton(title: 'الاعضاء', index: 2, icon: 0xe7ef, color: Colors.green[300]),
+        _homeButton(title: 'الفعاليات', index: 3, icon: 0xe164, color: Colors.blueAccent[200]),
+        _homeButton(title: 'احصائيات', index: 4, icon: 0xe85c, color: Colors.orangeAccent[200]),
+        _homeButton(title: 'مجموعتي', index: 5, icon: 0xe939, color: Colors.redAccent[100]),
+        _homeButton(title: 'الاقتراحات', index: 6, icon: 0xe266, color: Colors.teal[300]),
+        _homeButton(title: 'الاعدادات', index: 7, icon: 0xe8b8, color: Colors.blueGrey),
+        _homeButton1(title:'نسبة الكافيين', index: 8),
       ],
     );
   }
 
-  Widget _homeButton({title, index, icon}) {
+  Widget _homeButton({title, index, icon, color}) {
     return Container(
       child: RaisedButton(
-        onPressed: () => _homeRouter(index), 
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center, 
-            children: <Widget>[
-                Icon(IconData(icon, fontFamily: 'MaterialIcons'), size: 40.0,) , 
-                Container(child: Text(title, style: TextStyle(fontSize: 18)), margin: EdgeInsets.only(top: 10.0))
-              ])
-          ), 
-        margin: EdgeInsets.only(top: 10.0),
-      );
+          color: color,
+          onPressed: () => _homeRouter(index),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Icon(
+                  IconData(icon, fontFamily: 'MaterialIcons'),
+                  color: Colors.white,
+                  size: 40.0,
+                ),
+                Container(
+                    child: Text(title, style: TextStyle(fontSize: 18, color: Colors.white)),
+                    margin: EdgeInsets.only(top: 10.0))
+              ])),
+      margin: EdgeInsets.only(top: 10.0),
+    );
+  }
+
+  Widget _homeButton1({title, index}) {
+    return Container(
+      child: RaisedButton(
+          color: Colors.brown.shade400,
+          onPressed: () => _homeRouter(index),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text('${caff}', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white))
+                ,
+                Container(
+                    child: Text(title, style: TextStyle(fontSize: 18, color: Colors.white)),
+                    margin: EdgeInsets.only(top: 10.0))
+              ])),
+      margin: EdgeInsets.only(top: 10.0),
+    );
   }
 
   void _homeRouter(index) {
     print(index);
     switch (index) {
-      case 1: 
+      case 1:
         _goToElectionPage();
         return;
-      case 2: 
+      case 2:
         _goToMembersPage();
         return;
-      case 4: 
+      case 4:
         _goToStatisticsPage();
+        return;
+      case 7: 
+        _goToSettingsPage();
         return;
     }
   }
 
   void _goToStatisticsPage() {
-    Navigator.of(context).push(
-      new MaterialPageRoute<void>(
-        builder: (BuildContext context) {    
-          return StatisticsPage();
-        },
-      )
-    );
+    Navigator.of(context).push(new MaterialPageRoute<void>(
+      builder: (BuildContext context) {
+        return StatisticsPage();
+      },
+    ));
   }
 
   void _goToElectionPage() {
-    Navigator.of(context).push(
-      new MaterialPageRoute<void>(
-        builder: (BuildContext context) {    
-          return ElectionPage();
-        },
-      )
-    );
+    Navigator.of(context).push(new MaterialPageRoute<void>(
+      builder: (BuildContext context) {
+        return ElectionPage();
+      },
+    ));
   }
 
   void _goToMembersPage() {
-    Navigator.of(context).push(
-      new MaterialPageRoute<void>(
-        builder: (BuildContext context) {    
-          return MembersPage();
-        },
-      )
-    );
+    Navigator.of(context).push(new MaterialPageRoute<void>(
+      builder: (BuildContext context) {
+        return MembersPage();
+      },
+    ));
+  }
+
+  void _goToSettingsPage() {
+    Navigator.of(context).push(new MaterialPageRoute<void>(
+      builder: (BuildContext context) {
+        return SettingsPage();
+      },
+    ));
   }
 }
-

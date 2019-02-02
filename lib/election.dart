@@ -32,7 +32,7 @@ class ElectionPageState extends State<ElectionPage> with WidgetsBindingObserver{
     return Center(
       child: Container(
         child: ListView.builder(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(14.0),
           itemCount: candidateNames.length,
           itemBuilder: (BuildContext ctxt, int i) {
             return _candidateCard(candidateNames[i], candidatePlans[i], candidateImages[i]);
@@ -47,23 +47,23 @@ class ElectionPageState extends State<ElectionPage> with WidgetsBindingObserver{
       Card(
         child: Column(children: [
           Container(
-            decoration: new BoxDecoration(color: Colors.grey.shade200),
+            decoration: new BoxDecoration(color: Colors.deepPurple.shade200,),
             alignment: Alignment.centerRight,
             child: Row(
               children: [
-                Container(child: Text(name), padding: EdgeInsets.only(right: 20),),
-                CircleAvatar(child: Image.asset('assets/images/profile_image.jpg'), backgroundColor: Colors.brown.shade800,),
+                Container(child: Text(name, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white)), padding: EdgeInsets.only(right: 20),),
+                CircleAvatar(child: ClipRRect(child: Image.asset('assets/images/${image}_min.jpg', width: 55, height: 55),borderRadius: new BorderRadius.all(Radius.elliptical(20, 20)),),)
               ], 
-              mainAxisAlignment: MainAxisAlignment.end), 
-            padding: EdgeInsets.all(15),
+              mainAxisAlignment: MainAxisAlignment.center), 
+            padding: EdgeInsets.only(top: 15, bottom:15, left: 10),
           ),
           Container(child: Column(children: <Widget>[
-            Container(child: Text('الخطة', style: TextStyle(fontSize: 13)), padding: EdgeInsets.only(top: 10)),
-            Container(child: Text(plan, style: TextStyle(fontSize: 10), textDirection: TextDirection.rtl), padding: EdgeInsets.only(top: 5, bottom: 20, left: 20, right: 20)),
+            Container(child: Chip(label: Text('خطة المرشح', style: TextStyle(fontSize: 13, letterSpacing: 2))), padding: EdgeInsets.only(top: 15, bottom: 5)),
+            Container(child: Text(plan, style: TextStyle(fontSize: 10, letterSpacing: 2), textDirection: TextDirection.rtl), padding: EdgeInsets.only(top: 5, bottom: 20, left: 20, right: 20)),
             Container(
               child: ButtonBar(
                 children:[
-                  RaisedButton(child: Text('اسئلة الاعضاء', style: TextStyle(fontSize: 10, color: Colors.white)), onPressed: () { _pushQuestionsPage(name); }, color: Colors.deepPurple.shade300,), 
+                  RaisedButton(child: Text('اسئلة الموجهة للمرشح', style: TextStyle(fontSize: 10, color: Colors.white)), onPressed: () { _pushQuestionsPage(name); }, color: Colors.deepPurple.shade300,), 
                   RaisedButton(child: Text('تصويت', style: TextStyle(fontSize: 10, color: Colors.white)), onPressed: _seeCandidatePage, color: Colors.green.shade400,), 
                 ],
                 mainAxisSize: MainAxisSize.max,
@@ -178,12 +178,12 @@ class ElectionPageState extends State<ElectionPage> with WidgetsBindingObserver{
     'عن طريق النشر و الاعلان ان ان ان',
   ];
 
-  final candidateNames = ['اسامة الفيفي', 'ابراهيم الفرحان', 'عبدالرحمن السنيدي'];
+  final candidateNames = ['نواف القعيد', 'ابراهيم الفرحان', 'ناصر العواجي'];
   final candidatePlans = [
-    'يعود بالضرر على الشركة والنادي يكون فيه متابعة مع تطورات النادي من ضيوف ومن مشاركات بحيث انه يتم التأكد من عدم مساس سياسة الدولة او سياسة الجامعة بما اذا كان المقصود بالسلطة انه يتم التحكم بقرارت النادي وش نسوي وايش ما نسوي فأكيد ال وانا بكون ضد هذا الشيء، بس بالطبع يعود بالضرر على الشركة والنادي يكون فيه متابعة مع تطورات النادي من ضيوف ومن مشاركات بحيث انه يتم التأكد من عدم مساس سياسة الدولة او سياسة الجامعة بما اذا كان المقصود بالسلطة انه يتم التحكم بقرارت النادي وش نسوي وايش ما نسوي فأكيد ال وانا بكون ضد هذا الشيء، بس بالطبع يعود بالضرر على الشركة والنادي يكون فيه متابعة مع تطورات النادي من ضيوف ومن مشاركات بحيث انه يتم التأكد من عدم مساس سياسة الدولة او سياسة الجامعة بما اذا كان المقصود بالسلطة انه يتم التحكم بقرارت النادي وش نسوي وايش ما نسوي فأكيد ال وانا بكون ضد هذا الشيء، بس بالطبع', 
-    'Make FTC Great Again Make FTC Great Again Make FTC Great Again Make FTC Great Again Make FTC Great Again Make FTC Great Again Make FTC Great Again ', 
+    'أخوكم المترشح نواف القعيد، والنائب أسامة العقيلي. سنتشرح لقيادة هذا النادي العظيم الترم القادم بحول هللا.نثق بكم تمام الثقة وبأنكم العمود الفقري لهذا النادي بحكم ما شهدنا منكم وبطموحكم الغير مسبوق. ونثق بأننا بجهودكم الجبارة سنصل بالنادي الى مستوى يجعلنا فخورين بالنادي وإنجازاته التي سنحققها معكم بإذن هللا تعالى أخوكم المترشح أسامة الفيفي، والنائب أسامة العقيلي. سنتشرح لقيادة هذا النادي العظيم الترم القادم بحول هللا.نثق بكم تمام الثقة وبأنكم العمود الفقري لهذا النادي بحكم ما شهدنا منكم وبطموحكم الغير مسبوق. ونثق بأننا بجهودكم الجبارة سنصل بالنادي الى مستوى يجعلنا فخورين بالنادي وإنجازاته التي سنحققها معكم بإذن هللا تعالى أخوكم المترشح أسامة الفيفي، والنائب أسامة العقيلي. سنتشرح لقيادة هذا النادي العظيم الترم القادم بحول هللا.نثق بكم تمام الثقة وبأنكم العمود الفقري لهذا النادي بحكم ما شهدنا منكم وبطموحكم الغير مسبوق. ونثق بأننا بجهودكم الجبارة سنصل بالنادي الى مستوى يجعلنا فخورين بالنادي وإنجازاته التي سنحققها معكم بإذن هللا تعالى', 
+    'Make FTC Great Again Make FTC Great.', 
     'هلا شباب معكم دحومي ثلاث تسعات هلا شباب معكم دحومي ثلاث تسعات هلا شباب معكم دحومي ثلاث تسعات هلا شباب معكم دحومي ثلاث تسعات هلا شباب معكم دحومي ثلاث تسعات هلا شباب معكم دحومي ثلاث تسعات '
     ];
-  final candidateImages = ['1', '2', '3'];
+  final candidateImages = ['3', '4', '7'];
 
 }
