@@ -102,7 +102,7 @@ class HomePageState extends State<HomePage> {
     return Container(
       child: RaisedButton(
           color: Colors.brown.shade400,
-          onPressed: () => _homeRouter(index),
+          onPressed: () { _homeRouter(index); },
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
